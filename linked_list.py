@@ -38,6 +38,9 @@ class LinkedList:
         else:
             append_node.prev = self.__tail
             self.__tail.next = append_node
+            self.__tail = append_node
+
+        self.__len += 1
 
     def clear(self):
         '''
@@ -53,6 +56,8 @@ class LinkedList:
 
     def delete(self, index):
         ...
+
+
 
 
 if __name__ == '__main__':
