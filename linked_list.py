@@ -54,16 +54,16 @@ class LinkedList:
         '''
         ...
 
-    def find(self, node):
-        ...
+    def find(self, value):
+        for index, linked_list_value in self:
+            if value == linked_list_value:
+                return index
 
     def remove(self, value):
         ...
 
     def delete(self, index):
         ...
-
-
 
 
 if __name__ == '__main__':
