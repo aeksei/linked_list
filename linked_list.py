@@ -1,3 +1,5 @@
+from typing import Any
+
 from node import Node
 
 
@@ -15,20 +17,27 @@ class LinkedList:
         if not self.__len:  # пустой список
             self.__head = insert_node
             self.__tail = self.__head
-
-            self.__len += 1
-
         elif index >= self.__len:  # вставка вне границ
             insert_node.prev = self.__tail
             self.__tail.next = insert_node
             self.__tail = insert_node
 
-    def append(self, node):
-        '''
+        self.__len += 1
+
+    def append(self, value: Any) -> None:
+        """
         Append Node to tail of LinkedList
-        node - Node
-        '''
-        ...
+
+        :param value:
+        :return: None
+        """
+        append_node = Node(value)
+        if not self.__len:  # пустой список
+            self.__head = append_node
+            self.__tail = self.__head
+        else:
+            append_node.prev = self.__tail
+            self.__tail.next = append_node
 
     def clear(self):
         '''
@@ -39,7 +48,7 @@ class LinkedList:
     def find(self, node):
         ...
 
-    def remove(self, node):
+    def remove(self, value):
         ...
 
     def delete(self, index):
@@ -48,4 +57,5 @@ class LinkedList:
 
 if __name__ == '__main__':
     l = LinkedList()
-    print(len(l))
+    l.append(1)
+
