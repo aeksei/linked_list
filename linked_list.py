@@ -42,6 +42,12 @@ class LinkedList:
 
         self.__len += 1
 
+    def __iter__(self):
+        current_node = self.__head
+        for _ in range(self.__len):
+            yield current_node.value
+            current_node = current_node.next
+
     def clear(self):
         '''
         Clear LinkedList
@@ -63,4 +69,8 @@ class LinkedList:
 if __name__ == '__main__':
     l = LinkedList()
     l.append(1)
+    l.append(2)
+
+    for value in l:
+        print(value)
 
