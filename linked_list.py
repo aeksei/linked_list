@@ -49,10 +49,20 @@ class LinkedList:
             current_node = current_node.next
 
     def clear(self):
-        '''
-        Clear LinkedList
-        '''
-        ...
+        current_node = self.__head
+        for _ in range(self.__len):
+            next_node = current_node.next
+            current_node.next
+            del(current_node)
+            current_node = next_node
+
+        self.__len = 0
+
+    def test_memory(self):
+        self.append(5)
+        self.clear()
+        print(self.__head)
+        print(self.__tail)
 
     def find(self, value):
         for index, linked_list_value in self:
@@ -68,9 +78,4 @@ class LinkedList:
 
 if __name__ == '__main__':
     l = LinkedList()
-    l.append(1)
-    l.append(2)
-
-    for value in l:
-        print(value)
-
+    l.test_memory()
