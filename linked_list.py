@@ -23,10 +23,27 @@ class LinkedList:
             self.__tail.next = insert_node
             self.__tail = insert_node
 
+    def append(self, node):
+        '''
+        Append Node to tail of LinkedList
+        node - Node
+        '''
+        ...
 
+    def clear(self):
+        '''
+        Clear LinkedList
+        '''
+        ...
 
+    def find(self, node):
+        ...
 
+    def remove(self, node):
+        ...
 
+    def delete(self, index):
+        ...
 
 
 if __name__ == '__main__':
