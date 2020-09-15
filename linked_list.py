@@ -44,8 +44,17 @@ class LinkedList:
             yield current_node.value
             current_node = current_node.next
 
+    def __setitem__(self, key, value):
+        current_node = self._head
+        for _ in range(key):
+            current_node = current_node.next
+
+        current_node.value = value  # LinkedList[10]
+
     def write(self):
         self.driver.write([value for value in self])
+
+
 
 
 class ObservedLinkedList(LinkedList, Object):

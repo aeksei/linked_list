@@ -9,8 +9,7 @@ def main():
     l.append(5)
     l.append(10)
 
-    for value in l:
-        print(value)
+    l[0] = 100
 
 
 if __name__ == '__main__':
