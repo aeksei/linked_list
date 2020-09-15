@@ -23,6 +23,24 @@ class LinkedList:
             self.__tail.next = insert_node
             self.__tail = insert_node
 
+    def append(self, value):
+        append_node = Node(value)
+        if not self.__len:  # пустой список
+            self.__head = append_node
+            self.__tail = self.__head
+        else:
+            append_node.prev = self.__tail
+            self.__tail.next = append_node
+            self.__tail = append_node
+
+        self.__len += 1
+
+    def __iter__(self):
+        current_node = self.__head
+        for _ in range(self.__len):
+            yield current_node.value
+            current_node = current_node.next
+
 
 if __name__ == '__main__':
     l = LinkedList()
