@@ -1,8 +1,10 @@
 from node import Node
+from driver import IStructureDriver
 
 
 class LinkedList:
-    def __init__(self):
+    def __init__(self, driver: IStructureDriver = None):
+        self.driver = driver
         self.__head = None
         self.__tail = None
         self.__len = 0
@@ -40,6 +42,9 @@ class LinkedList:
         for _ in range(self.__len):
             yield current_node.value
             current_node = current_node.next
+
+    def write(self):
+        self.driver.write((value for value in self))
 
 
 if __name__ == '__main__':
