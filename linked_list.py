@@ -53,9 +53,7 @@ class LinkedList:
 
     def write(self):
         self.driver.write([value for value in self])
-
-
-
+        
 
 class ObservedLinkedList(LinkedList, Object):
     def __init__(self, driver: IStructureDriver = None):
