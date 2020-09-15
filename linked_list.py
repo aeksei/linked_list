@@ -24,11 +24,6 @@ class LinkedList:
             self.__tail = insert_node
 
 
-
-
-
-
-
 if __name__ == '__main__':
     l = LinkedList()
     print(len(l))
