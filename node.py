@@ -1,8 +1,9 @@
-from typing import Any
+from typing import Any, Sequence
+from observed import Subject
 
 
-class Node:
-    def __init__(self, value: Any, next_=None, prev=None):
+class Node(Subject):
+    def __init__(self, value: Any, next_=None, prev=None, objects: Sequence = None):
         """
         Создаем новый узел для двусвязного списка
 
@@ -10,6 +11,7 @@ class Node:
         :param next_: node class Node
         :param prev: node class Node
         """
+        super().__init__(objects)
         self.__next = next_  # class Node
         self.__prev = prev
         self.value = value
@@ -34,6 +36,15 @@ class Node:
         if not isinstance(prev, Node):
             raise TypeError
         self.__prev = prev
+
+    @property
+    def value(self):
+        return self.__value
+
+    @value.setter
+    def value(self, val):
+        self.__value = val
+        self.notify()
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.value}, {self.next.value}, {self.prev.value})"

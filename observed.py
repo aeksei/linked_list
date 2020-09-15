@@ -4,8 +4,9 @@ class Object:
 
 
 class Subject:
-    def __init__(self):
-        self.__o = set()  # множество объектов (Object)
+    def __init__(self, objects=None):
+
+        self.__o = set(objects) if objects is not None else set()  # множество объектов (Object)
 
     def add_object(self, o: Object):
         self.__o.add(o)
