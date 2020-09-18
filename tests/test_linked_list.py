@@ -20,6 +20,9 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual(self.linked_list._LinkedList__tail.value, 2)
         self.assertEqual(len(self.linked_list), 2)
 
+    def test_insert(self):
+        pass
+
     def test_iter(self):
         values = [1, 2]
 

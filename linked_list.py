@@ -14,17 +14,37 @@ class LinkedList:
         return self.__len
 
     def insert(self, index, value):
-        insert_node = Node(value)
         if not self.__len:  # пустой список
-            self._head = insert_node
+            self._head = Node(value)
             self._tail = self._head
 
-            self.__len += 1
-
         elif index >= self.__len:  # вставка вне границ
-            insert_node.prev = self._tail
-            self._tail.next = insert_node
+            self.append(value)
+
+        elif index == 0:
+            insert_node = Node(value)
+            self.__insert(insert_node, None, self._head)
+            self._head = insert_node
+
+        elif index == (self.__len - 1):
+            insert_node = Node(value)
+            self.__insert(insert_node, self._tail, None)
             self._tail = insert_node
+        else:
+
+
+        self.__len += 1
+
+    def __insert(self, insert_node: Node, left_node: Node = None, right_node: Node = None):
+        insert_node.prev = left_node
+        insert_node.next = right_node
+
+        if left_node is not None:
+            left_node.next = insert_node
+        if right_node is not None:
+            right_node.next = insert_node
+
+        return insert_node
 
     def append(self, value):
         append_node = Node(value)
