@@ -1,10 +1,13 @@
 import json
+from abc import ABC, abstractmethod
 
 
-class IStructureDriver:
+class IStructureDriver(ABC):
+    @abstractmethod
     def read(self):
         pass
 
+    @abstractmethod
     def write(self, d):
         pass
 
