@@ -1,12 +1,13 @@
-from typing import Any
-
 from node import Node
+from driver import IStructureDriver
+from observed import Object
 
 
 class LinkedList:
-    def __init__(self):
-        self.__head = None
-        self.__tail = None
+    def __init__(self, driver: IStructureDriver = None):
+        self.driver = driver
+        self._head = None
+        self._tail = None
         self.__len = 0
 
     def __len__(self):
@@ -15,67 +16,58 @@ class LinkedList:
     def insert(self, index, value):
         insert_node = Node(value)
         if not self.__len:  # пустой список
-            self.__head = insert_node
-            self.__tail = self.__head
+            self._head = insert_node
+            self._tail = self._head
+
+            self.__len += 1
+
         elif index >= self.__len:  # вставка вне границ
-            insert_node.prev = self.__tail
-            self.__tail.next = insert_node
-            self.__tail = insert_node
+            insert_node.prev = self._tail
+            self._tail.next = insert_node
+            self._tail = insert_node
 
-        self.__len += 1
-
-    def append(self, value: Any) -> None:
-        """
-        Append Node to tail of LinkedList
-
-        :param value:
-        :return: None
-        """
+    def append(self, value):
         append_node = Node(value)
         if not self.__len:  # пустой список
-            self.__head = append_node
-            self.__tail = self.__head
+            self._head = append_node
+            self._tail = self._head
         else:
-            append_node.prev = self.__tail
-            self.__tail.next = append_node
-            self.__tail = append_node
+            append_node.prev = self._tail
+            self._tail.next = append_node
+            self._tail = append_node
 
         self.__len += 1
 
     def __iter__(self):
-        current_node = self.__head
+        current_node = self._head
         for _ in range(self.__len):
             yield current_node.value
             current_node = current_node.next
 
-    def clear(self):
-        current_node = self.__head
-        for _ in range(self.__len):
-            next_node = current_node.next
-            current_node.next
-            del(current_node)
-            current_node = next_node
+    def __setitem__(self, key, value):
+        current_node = self._head
+        for _ in range(key):
+            current_node = current_node.next
 
-        self.__len = 0
+        current_node.value = value  # LinkedList[10]
 
-    def test_memory(self):
-        self.append(5)
-        self.clear()
-        print(self.__head)
-        print(self.__tail)
+    def write(self):
+        self.driver.write([value for value in self])
+        
 
-    def find(self, value):
-        for index, linked_list_value in self:
-            if value == linked_list_value:
-                return index
+class ObservedLinkedList(LinkedList, Object):
+    def __init__(self, driver: IStructureDriver = None):
+        super().__init__(driver)
 
-    def remove(self, value):
-        ...
+    def update(self):
+        self.write()
 
-    def delete(self, index):
-        ...
+    def append(self, value):
+        super().append(value)
+        self._tail.add_object(self)
+        self._tail.notify()
 
 
 if __name__ == '__main__':
     l = LinkedList()
-    l.test_memory()
+    print(len(l))

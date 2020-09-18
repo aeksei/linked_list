@@ -20,6 +20,7 @@ class JsonFileDriver(IStructureDriver):
     def write(self, d) -> None:
         with open(self.filename, 'w', encoding='utf-8') as f:
             json.dump(d, f)
+            f.flush()
 
 
 class MyList:
