@@ -1,3 +1,6 @@
+import sys
+from weakref import ref
+
 from typing import Any, Sequence
 from observed import Subject
 
@@ -47,4 +50,29 @@ class Node(Subject):
         self.notify()
 
     def __repr__(self):
-        return f"{self.__class__.__name__}({self.value}, {self.next.value}, {self.prev.value})"
+
+        return f"{self.__class__.__name__}({self.value}, " \
+               f"{self.next.value if self.next is not None else None}, " \
+               f"{self.prev.value if self.prev is not None else None})"
+
+
+if __name__ == '__main__':
+    # first = Node(5)
+    # second = Node(10, prev=first)
+    # first.next = second
+    #
+    # print(sys.getrefcount(first))
+    # print(sys.getrefcount(second))
+    #
+    # del first
+    # second.prev = None
+    # print(sys.getrefcount(second.prev))
+    # print(second.prev)
+    # print(sys.getrefcount(second))
+
+    a = Node(5)
+    print(sys.getrefcount(a))
+
+    b = ref(a)
+    print(sys.getrefcount(a))
+
