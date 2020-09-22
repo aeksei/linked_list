@@ -30,8 +30,6 @@ class LinkedList:
             insert_node = Node(value)
             self.__insert(insert_node, self._tail, None)
             self._tail = insert_node
-        else:
-
 
         self.__len += 1
 
