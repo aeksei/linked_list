@@ -11,7 +11,17 @@ class LinkedList:
         self.__len = 0
 
     def __len__(self):
-        return self.__len
+        if self._head is None:
+            return 0
+
+        current_node = self._head
+        len_ = 1
+
+        while current_node.next is not None:
+            len_ += 1
+            current_node = current_node.next
+
+        return len_
 
     def insert(self, index, value):
         if not self.__len:  # пустой список
@@ -71,7 +81,11 @@ class LinkedList:
 
     def write(self):
         self.driver.write([value for value in self])
-        
+
+    def clear(self):
+        self._head = None
+        self._tail = None
+
 
 class ObservedLinkedList(LinkedList, Object):
     def __init__(self, driver: IStructureDriver = None):
@@ -89,3 +103,11 @@ class ObservedLinkedList(LinkedList, Object):
 if __name__ == '__main__':
     l = LinkedList()
     print(len(l))
+
+    for i in range(10):
+        l.append(i)
+
+    print(len(l))
+    l.clear()
+    print(len(l))
+    print(l._tail)

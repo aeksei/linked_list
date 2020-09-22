@@ -55,21 +55,23 @@ class Node(Subject):
                f"{self.next.value if self.next is not None else None}, " \
                f"{self.prev.value if self.prev is not None else None})"
 
+    def __del__(self):
+        print(f"Нода {repr(self)} удалена")
 
 if __name__ == '__main__':
     first = Node(5)
     second = Node(10, prev=first)
     first.next = second
 
-    count_ref_a = sys.getrefcount(first)
-    print(count_ref_a)
-    # print(sys.getrefcount(second))
+    print("first", sys.getrefcount(first) - 1)
+    print("second", sys.getrefcount(second) - 1)
 
-    # del first
-    # second.prev = None
-    # print(sys.getrefcount(second.prev))
-    # print(second.prev)
-    # print(sys.getrefcount(second))
+    print(second.prev)
+    del first
+    print("second after del", sys.getrefcount(second) - 1)
+    print(second.prev)
+
+
 
 
 

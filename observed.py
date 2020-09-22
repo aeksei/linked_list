@@ -1,3 +1,5 @@
+import weakref
+
 class Object:
     def update(self):
         pass
@@ -6,7 +8,7 @@ class Object:
 class Subject:
     def __init__(self, objects=None):
 
-        self.__o = set(objects) if objects is not None else set()  # множество объектов (Object)
+        self.__o = weakref.WeakSet(objects) if objects is not None else set()  # множество объектов (Object)
 
     def add_object(self, o: Object):
         self.__o.add(o)
