@@ -15,8 +15,8 @@ class Node(Subject):
         :param prev: node class Node
         """
         super().__init__(objects)
-        self.__next = next_  # class Node
-        self.__prev = prev
+        self.next = next_  # class Node
+        self.prev = prev
         self.value = value
 
     @property
@@ -25,20 +25,20 @@ class Node(Subject):
 
     @next.setter
     def next(self, next_):
-        if not isinstance(next_, Node):
+        if not isinstance(next_, (Node, type(None))):
             raise TypeError
 
         self.__next = next_
 
     @property
     def prev(self):
-        return self.__prev
+        return self.__prev() if self.__prev is not None else None
 
     @prev.setter
     def prev(self, prev):
-        if not isinstance(prev, Node):
+        if not isinstance(prev, (Node, type(None))):
             raise TypeError
-        self.__prev = prev
+        self.__prev = ref(prev) if prev is not None else None
 
     @property
     def value(self):
@@ -57,22 +57,23 @@ class Node(Subject):
 
 
 if __name__ == '__main__':
-    # first = Node(5)
-    # second = Node(10, prev=first)
-    # first.next = second
-    #
-    # print(sys.getrefcount(first))
+    first = Node(5)
+    second = Node(10, prev=first)
+    first.next = second
+
+    count_ref_a = sys.getrefcount(first)
+    print(count_ref_a)
     # print(sys.getrefcount(second))
-    #
+
     # del first
     # second.prev = None
     # print(sys.getrefcount(second.prev))
     # print(second.prev)
     # print(sys.getrefcount(second))
 
-    a = Node(5)
-    print(sys.getrefcount(a))
 
-    b = ref(a)
-    print(sys.getrefcount(a))
+
+
+
+
 
